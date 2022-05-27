@@ -1,16 +1,7 @@
 .. role:: shell(code)
    :language: shell
 
-Приложение для `практического руководства`_ по разработке бэкенд-сервисов на Python (на основе `вступительного испытания`_ в `Школу бэкенд-разработки Яндекса`_ в 2019 году).
-
-.. _практического руководства: https://habr.com/ru/company/yandex/blog/499534/
-.. _вступительного испытания: https://disk.yandex.ru/i/dA9umaGbQdMNLw
-.. _Школу бэкенд-разработки Яндекса: https://yandex.ru/promo/academy/backend-school/
-
-.. image:: https://github.com/alvassin/backendschool2019/workflows/CI/badge.svg?branch=master&event=push
-    :target: https://github.com/alvassin/backendschool2019/actions?query=workflow%3ACI
-
-Что внутри?
+Приложение для `практического руководства`_ по разработке бэкенд-сервисов на Python.
 ===========
 Приложение упаковано в Docker-контейнер и разворачивается с помощью Ansible.
 
@@ -98,8 +89,6 @@ deploy/hosts.ini (с установленной Ubuntu) и выполните к
     make postgres
     source env/bin/activate
     pytest
-
-Для отладки в PyCharm необходимо запустить :shell:`env/bin/pytest`.
 
 Как запустить нагрузочное тестирование?
 ---------------------------------------
