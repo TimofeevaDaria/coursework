@@ -28,7 +28,6 @@ setup(
     version=module.__version__,
     author=module.__author__,
     author_email=module.__email__,
-    license=module.__license__,
     description=module.__doc__,
     long_description=open('README.rst').read(),
     url='https://github.com/alvassin/backendschool2019',
