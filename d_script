@@ -1,0 +1,67 @@
+#!/bin/bash
+# установка докера на убунту (https://docs.docker.com/engine/install/ubuntu/)
+
+read -r -p "Установить pip? [y/N] " response
+if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
+then
+    apt update
+    apt install python3-pip
+fi
+
+read -r -p "Установить докер? [y/N] " response
+if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
+then
+    apt install \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+    
+    mkdir -p /etc/apt/keyrings
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+    echo \
+      "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+      $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  
+    apt update
+    apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+
+
+    docker run hello-world
+fi
+
+
+# установка и запуск проекта
+read -r -p "Скачать проект? [y/N] " response
+if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
+then
+    git clone https://github.com/timofeevadaria/coursework.git
+    cd coursework
+    sed -i '1 i markupsafe==2.0.1' requirements.txt
+fi
+
+
+read -r -p "Собрать контейнер? [y/N] " response
+if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
+then
+    make docker
+fi
+
+read -r -p "Поднять базу данных? [y/N] " response
+if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
+then
+    make postgres
+fi
+
+read -r -p "Применить миграции? [y/N] " response
+if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
+then
+    docker run -it --network host -e ANALYZER_PG_URL=postgresql://user:hackme@localhost/analyzer alvassin/backendschool2019 analyzer-db upgrade head
+fi
+
+read -r -p "Запустить проект локально? [y/N] " response
+if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
+then
+    docker run -it --network host -p 8081:8081 -e ANALYZER_PG_URL=postgresql://user:hackme@localhost/analyzer alvassin/backendschool2019
+fi
+
