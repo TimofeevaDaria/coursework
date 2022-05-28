@@ -1,9 +1,9 @@
 .. role:: shell(code)
    :language: shell
 
-Приложение для `практического руководства`_ по разработке бэкенд-сервисов на Python.
+Разработкаь REST API-сервис посредством языка Python
 ===========
-Приложение упаковано в Docker-контейнер и разворачивается с помощью Ansible.
+Приложение упаковано в Docker-контейнер
 
 Внутри Docker-контейнера доступны две команды: :shell:`analyzer-db` — утилита
 для управления состоянием базы данных и :shell:`analyzer-api` — утилита для 
@@ -32,8 +32,8 @@
 
 .. code-block:: shell
 
-    docker run alvassin/backendschool2019 analyzer-db --help
-    docker run alvassin/backendschool2019 analyzer-api --help
+    docker run timofeevadaria/coursework analyzer-db --help
+    docker run timofeevadaria/coursework analyzer-api --help
 
 Опции для запуска можно указывать как аргументами командной строки, так и
 переменными окружения с префиксом :shell:`ANALYZER` (например: вместо аргумента
@@ -63,10 +63,6 @@ deploy/hosts.ini (с установленной Ubuntu) и выполните к
 * :shell:`make sdist` Создать `source distribution`_
 * :shell:`make docker` Собрать Docker-образ
 * :shell:`make upload` Загрузить Docker-образ на hub.docker.com
-
-.. _pylama: https://github.com/klen/pylama
-.. _distutils: https://docs.python.org/3/library/distutils.html
-.. _source distribution: https://packaging.python.org/glossary/
 
 Как подготовить окружение для разработки?
 -----------------------------------------
